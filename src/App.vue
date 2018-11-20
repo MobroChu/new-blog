@@ -22,7 +22,7 @@ export default {
 
 <style lang="stylus">
 body
-  background linear-gradient(0deg, #FFFFFF, #2980B9) no-repeat
+  background linear-gradient(0deg, #98b0e6, #2980B9) no-repeat
 .app
   font-family 'Avenir', Helvetica, Arial, sans-serif
   -webkit-font-smoothing antialiased
