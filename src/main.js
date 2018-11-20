@@ -1,13 +1,18 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
-import App from './App'
 import router from './router'
 import './config/rem'
 import './assets/base.css'
+import '@/assets/font/iconfont.css'
 import FastClick from 'fastclick'
+import store from '@/store'
+import axios from 'axios'
 
 Vue.config.productionTip = false
+Vue.prototype.$axios = axios
+
+if (process.env.NODE_ENV === 'development') require('@/mock/')
 
 if ('addEventListener' in document) {
   document.addEventListener('DOMContentLoaded', function () {
@@ -17,8 +22,6 @@ if ('addEventListener' in document) {
 
 /* eslint-disable no-new */
 new Vue({
-  el: '#app',
   router,
-  components: { App },
-  template: '<App/>'
-})
+  store
+}).$mount('#app')

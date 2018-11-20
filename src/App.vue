@@ -1,31 +1,38 @@
 <template>
-  <div id="app">
-    <router-view/>
+  <div class="app">
+    <transition name="router-fade" mode="out-in">
+      <keep-alive>
+        <router-view v-if="$route.meta.keepAlive"></router-view>
+      </keep-alive>
+    </transition>
+    <transition>
+      <router-view v-if="!$route.meta.keepAlive"></router-view>
+    </transition>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  mounted () {
+    console.log('-- Mobro Zhu')
+  }
 }
 </script>
 
 <style lang="stylus">
 body
-  background linear-gradient(0deg, #F2F2F2, #ADA996) no-repeat
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  font-size: 14px;
-  margin: 0px auto;
-  padding-top: 60px;
-  max-width: 1200px;
-}
+  background linear-gradient(0deg, #FFFFFF, #2980B9) no-repeat
+.app
+  font-family 'Avenir', Helvetica, Arial, sans-serif
+  -webkit-font-smoothing antialiased
+  -moz-osx-font-smoothing grayscale
+  text-align center
+  color $text-color
+  font-size 14px
+  margin 0px auto
 @media screen and (max-width: 1200px) {
-  #app {
+  .app {
     max-width: 800px;
   }
 }
