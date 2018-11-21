@@ -1,13 +1,15 @@
 <template>
-  <div class="head">
-    <p v-for="menu in menus"
+  <div class="head" @click="headClick">
+    <router-link
+      v-for="(menu, index) in menus"
       :key="menu.title"
-      :class="{'active': menu.active}"
+      :class="{'active': currentIndex === index}"
       class="head-menu"
+      :data-index="index"
+      :to="menu.path"
     >
       {{menu.title}}
-      <!-- <tag msg="completed" class="tag warning" hollow></tag> -->
-    </p>
+    </router-link>
   </div>
 </template>
 
@@ -15,34 +17,40 @@
 import tag from '@components/tag/tag'
 
 export default {
-  name: 'HelloWorld',
+  name: 'menu-list',
   components: {
     tag
   },
   data () {
     return {
+      currentIndex: 0,
       menus: [
         {
-          title: 'menu-1',
-          active: true
+          title: '首页',
+          path: '/'
         },
         {
-          title: 'menu-2',
-          active: false
+          title: 'demo',
+          path: 'todo'
         },
         {
-          title: 'menu-3',
-          active: false
+          title: '博客',
+          path: 'https://blog.csdn.net/weixin_41610178'
         },
         {
           title: 'menu-4',
-          active: false
+          path: '/'
         },
         {
           title: 'menu-5',
-          active: false
+          path: '/'
         }
       ]
+    }
+  },
+  methods: {
+    headClick (e) {
+      this.currentIndex = parseInt(e.target.dataset.index)
     }
   }
 }
@@ -58,6 +66,7 @@ export default {
       color #effeef
       border-radius 3px
       margin 2px
+      cursor pointer
       &.active
         opacity .7
       &:hover
